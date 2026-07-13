@@ -67,5 +67,33 @@ for (var i = 0; i < 3; i++) {
 // so they orint 0 , 1 , 2 with let
 
 
+function Component() {
+    const [count, setCount] = useState(0);
 
+    function display() {
+        setTimeout(() => {
+            console.log(count);
+        }, 3000)
+    }
+
+    return (
+        <div>
+            <button onClick={() => setCount(count + 1)}>
+                +
+            </button>
+            <button onClick={display}>
+                showCount
+            </button>
+        </div>
+    )
+}
+
+// Above suppose we click + 5 times we sitll will see 1 , why ??
+/* 
+  Because the re renders create closure different each time and each time they have count = 0 
+  so (0+1) 5 times would still print 1 
+
+  To solve this we use (p=>p+1) why?? pecause this predicate holds the latest value that react storage holds
+  This predicate value is out of closures and react storage could share it on re renders with updated value
+*/
 
