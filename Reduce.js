@@ -1,6 +1,6 @@
-let arr = [1, 2, 3, 4, 5, 6];
+let arr0 = [1, 2, 3, 4, 5, 6];
 
-const res = arr.reduce((acc, curr) => {
+const res = arr0.reduce((acc, curr) => {
     return acc + curr
 }, 0)
 
@@ -67,4 +67,32 @@ const result = [1, 2, 3].reduce((acc, curr) => {
 
     return acc + curr
 },);
-console.log(result);
+//console.log(result);
+
+
+function mapReduce(array, cb) {
+    return array.reduce((acc, curr) => {
+        acc.push(cb(curr));
+        return acc;
+    }, [])
+}
+
+let nums = [1, 2, 3, 4, 5];
+
+let double = mapReduce(nums, x => x * 2)
+
+console.log(double);
+
+
+function filterReduce(array, cb) {
+    return array.reduce((acc, curr) => {
+        if (cb(curr) === true) acc.push(curr);
+        return acc;
+    }, [])
+}
+
+let words = ['mango', 'Orange', 'Oraneg'];
+
+let sixLetterWords = filterReduce(words, x => x.length === 6);
+
+console.log(sixLetterWords);
